@@ -1,0 +1,3 @@
+---
+env:
+     JBP_CONFIG_LIBERTY: "version: +"

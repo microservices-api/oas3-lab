@@ -1,0 +1,222 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Cascon Session Enrollment",
+    "version": "1.0.0",
+    "description": "Sample API for Cascon session Enrollment"
+  },
+  "paths": {
+    "/visitors": {
+      "get": {
+        "summary": "get a list of all the visitors",
+        "description": "return a list of all the visitors",
+        "tags": [
+          "Cascon API"
+        ],
+        "responses": {
+          "200": {
+            "description": "list of visitors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Visitor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "register a new visitor",
+        "description": "creates a new visitor",
+        "tags": [
+          "Cascon API"
+        ],
+        "requestBody": {
+          "description": "visitor to enroll",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Visitor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "id of the visitor",
+            "content": {
+              "int": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "get": {
+        "summary": "get a list of sessions",
+        "description": "returns a list of sessions",
+        "tags": [
+          "Cascon API"
+        ],
+        "responses": {
+          "200": {
+            "description": "list of visitors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Session"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "book a new session",
+        "description": "a way to make a new session",
+        "tags": [
+          "Cascon API"
+        ],
+        "requestBody": {
+          "description": "session to book",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Session"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "id of the session",
+            "content": {
+              "int": {
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sessions/{sid}/visitors": {
+      "get": {
+        "summary": "get a list of visitors by session id",
+        "description": "returns a list of visitors for specific session",
+        "tags": [
+          "Cascon API"
+        ],
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "list of visitors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Visitor"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "enroll a visitor",
+        "description": "add a visitor to a specific session",
+        "tags": [
+          "Cascon API"
+        ],
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "description": "session id",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "vid",
+            "in": "query",
+            "required": true,
+            "description": "visitor id",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "enrolled a visitor in session"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Visitor": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    }
+  }
+}
