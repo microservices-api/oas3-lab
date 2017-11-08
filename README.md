@@ -1,6 +1,6 @@
-# OpenAPI Specification(OAS) 3.0 Labs
+# OpenAPI Specification (OAS) 3.0 Labs
 
-  - Setup: Install and Configure Necessary Tools
+  - Setup: Install and Configure Necessary Tools (skip this if you are using the VM provided at CASCON)
   - Lab 1: OpenAPI Support in WebSphere Liberty
   - Lab 2: Push APIs to the Cloud
   - Lab 3: OpenAPI Programming Models
